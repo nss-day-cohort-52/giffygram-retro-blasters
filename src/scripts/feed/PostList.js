@@ -13,7 +13,7 @@ export const giffyGramFeed = () => {
         // iterate through each post 
         for (const post of posts) {
             // posting feed content for post 
-            html += ` ${post.title}`
+            html += `<h3> ${post.title}</h3> <img src="${post.url}"> <p>${post.story}</p> <p>posted by: ${post.foundUser} on ${post.postDate}</p>`
         }
         return html
     }

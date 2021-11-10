@@ -1,6 +1,12 @@
-.giffygram__feed {
+.feed {
     padding: 7rem 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+
+img {
+    height: 25%;
+    width: 35%;
 }
