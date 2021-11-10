@@ -44,6 +44,8 @@ export const fetchUsers = () => {
         )
 
 }
+
+
 export const fetchPosts = () => {
     return fetch(`${apiURL}/posts`)
         .then(response => response.json())
@@ -55,7 +57,10 @@ export const fetchPosts = () => {
 
 }
 
+
+// Posting whatever object gets put into the parameter into the API 
 export const sendPost = (userPost) => {
+    // directions for the API 
     const fetchOptions = {
         method: "POST",
         headers: {
@@ -63,13 +68,16 @@ export const sendPost = (userPost) => {
         },
         body: JSON.stringify(userPost)
     }
+    // fetching the post table & telling the API to post the object into the post table
     return fetch(`${apiURL}/posts`, fetchOptions)
         .then(response => response.json())
+        // rerendering the page due to post page being updated
         .then(
             () => 
-                { mainContainer.dispatchevent(new CustomEvent("stateChanged")) }
+                { mainContainer.dispatchEvent(new CustomEvent("stateChanged")) }
 
 
 
 
-        )}
+        )
+}

@@ -1,30 +1,30 @@
 import { PostForm } from "./message/MessageForm.js"
 import { getPosts } from "./data/provider.js"
-
+import { giffyGramFeed } from "./feed/PostList.js"
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
-const posts = getPosts()
+
 
 // Defining function to return the Post Form button HTML 
+
 export const GiffyGram = () => {
-    return `
+    // setting HTML to empty string
+    let html = ""
+//   setting HTML for the post form section (button)
+    html += `
     <section class="postForm">
     <h1>Giffygram</h1>
     <button class="button" id="postButton">Have a gif to post?</button>
     </section>
 
+    <!-- Calling the function that displays posts in feed -->
+    <section class="postFeed">
+    ${giffyGramFeed()}
+    </section>`
 
-<section class="feed">
-</section>          
-    `
+    return html
 }
 
-
-let html = ""
-for (const post of posts) {
-    html += `${post.name}`
-
-}
 
 
 // document.querySelector(".giffygram .feed").innerHTML = html
@@ -37,6 +37,8 @@ mainContainer.addEventListener("click", click => {
         document.querySelector(".giffygram .postForm").innerHTML = PostForm()
 
     }
+
+    
 
 
 })

@@ -52,7 +52,7 @@ mainContainer.addEventListener("click", clickEvent => {
             story: storyPost,
            
         }
-
+        // calling SendPost (in database) with object created 
         sendPost(dataToSendToAPI)
     }
 })
