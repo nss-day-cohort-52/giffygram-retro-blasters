@@ -11,7 +11,8 @@ export const applicationState = {
         displayMessages: false
     },
     users: [],
-    posts: []
+    posts: [],
+    favorites: {}
 }
 
 
@@ -31,6 +32,10 @@ export const getCurrentUser = () => {
 // Set Functions
 export const setCurrentUser = (id) => {
     applicationState.currentUser.userId = id
+}
+
+export const setFavorites = (id) => {
+    applicationState.favorites.favoriteId = id
 }
 
 // Fetches

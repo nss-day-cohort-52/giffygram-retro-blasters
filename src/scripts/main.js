@@ -11,7 +11,7 @@ const mainContainer = document.querySelector(".giffygram")
 // Function to Render whole site 
 export const renderApp = () => {
     // looking to see if there is a current user object 
-    const currentUser = getCurrentUser()
+    const currentUser = localStorage.getItem('gg_user')
     // retrieve the users from the api 
     fetchUsers().then(
         () => {
@@ -21,7 +21,7 @@ export const renderApp = () => {
         .then(
             () => {
             // if current user id is "truthy" (exists) 
-            if (currentUser.userId) {
+            if (currentUser) {
                 // runs GiffyGram page if it's truthy
                 mainContainer.innerHTML = GiffyGram()
                
