@@ -2,11 +2,14 @@
     padding: 7rem 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
 
-img {
+.gif {
     height: 25%;
     width: 35%;
 }
+
+
+

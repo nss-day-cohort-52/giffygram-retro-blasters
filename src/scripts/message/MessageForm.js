@@ -46,11 +46,8 @@ mainContainer.addEventListener("click", clickEvent => {
         const urlPost = document.querySelector("input[name='postURL']").value
         const storyPost = document.querySelector("textarea[name='postStory']").value
         const date = new Date().toLocaleDateString();
-        const findUser = users.find((currentUser) => {
-            if(currentUser.userid === users.id) {
-                return true
-            }
-        })
+        const findUser = users.find((currentUserObj) => currentUserObj.userId === users.id)
+
 
         
 
