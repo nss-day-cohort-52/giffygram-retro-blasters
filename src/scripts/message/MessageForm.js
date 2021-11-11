@@ -39,14 +39,14 @@ const mainContainer = document.querySelector(".giffygram")
 
 mainContainer.addEventListener("click", clickEvent => {
     const users = getUsers()
-    const currentUser = getCurrentUser()
+    const currentUser = localStorage.getItem('gg_user')
     if (clickEvent.target.id === "saveButton") {
         // Get what the user typed into the form fields querySelector searches document
         const titlePost = document.querySelector("input[name='postTitle']").value
         const urlPost = document.querySelector("input[name='postURL']").value
         const storyPost = document.querySelector("textarea[name='postStory']").value
         const date = new Date().toLocaleDateString();
-        const findUser = users.find((user) => currentUser.userId === user.id)
+        const findUser = users.find((user) => parseInt(currentUser)  === user.id)
         
 
         
