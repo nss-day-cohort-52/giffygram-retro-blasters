@@ -1,13 +1,12 @@
 import { getUsers, setCurrentUser } from "../data/provider.js"
 
 // Targets when someone tries to login
+
 document.addEventListener("click", clickEvent => {
-    //Targets the login buttton
     if (clickEvent.target.id === "loginButton") {
         let foundUser = null
         const userState = getUsers()
 
-        //stores the email and password
         const email = document.querySelector("input[name='email']").value
         const password = document.querySelector("input[name='password']").value
 
@@ -17,8 +16,8 @@ document.addEventListener("click", clickEvent => {
             }
         }
 
-        // If the user is correct sets the gg_user
         if (foundUser !== null) {
+            localStorage.setItem("gg_user", foundUser.id)
             setCurrentUser(foundUser.id)
             document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
         }
