@@ -46,8 +46,7 @@ mainContainer.addEventListener("click", clickEvent => {
         const urlPost = document.querySelector("input[name='postURL']").value
         const storyPost = document.querySelector("textarea[name='postStory']").value
         const date = new Date().toLocaleDateString();
-        const findUser = users.find((currentUserObj) => currentUserObj.userId === users.id)
-
+        const findUser = users.find((user) => currentUser.userId === user.id)
 
         
 
@@ -58,7 +57,8 @@ mainContainer.addEventListener("click", clickEvent => {
             url: urlPost,
             story: storyPost,
             postDate: date,
-            foundUser: findUser.name
+            foundUser: findUser.name,
+            userId: findUser.id
            
         }
         // calling SendPost (in database) with object created 

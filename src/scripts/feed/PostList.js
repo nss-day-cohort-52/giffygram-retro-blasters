@@ -1,5 +1,9 @@
-
 import { getPosts } from "../data/provider.js"
+
+
+
+const mainContainer = document.querySelector(".giffygram")
+
 
 // Defining the giffyGramFeed function
 export const giffyGramFeed = () => {
@@ -13,13 +17,28 @@ export const giffyGramFeed = () => {
         // iterate through each post 
         for (const post of posts) {
             // posting feed content for post 
-            html += `<h3> ${post.title}</h3> <img class="gif" src="${post.url}"> <p>${post.story}</p> <p>posted by: ${post.foundUser} on ${post.postDate}</p><img class="favorites" src="./images/favorite-star-blank.svg">`
+            html +=
+                `<h3> ${post.title}</h3> 
+            <img class="gif" src="${post.url}"> 
+            <p><${post.story}</p> 
+            <section>
+                <p>posted by: </p>
+                <button class="userName" name="userProfile" value=${post.userId}>${post.foundUser}</button>
+                <p> on ${post.postDate}</p>
+            </section>
+            <img class="favorites" src="./images/favorite-star-blank.svg">`
 
         }
         return html
     }
     html += `</section>`
 }
+
+
+
+
+
+
 
 
 
