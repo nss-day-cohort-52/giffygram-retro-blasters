@@ -1,8 +1,9 @@
 import { PostForm } from "./message/MessageForm.js"
-import { getPosts } from "./data/provider.js"
+import { getPosts, setFeed} from "./data/provider.js"
 import { giffyGramFeed } from "./feed/PostList.js"
 import { setUserProfile } from "./data/provider.js"
 import { userProfile } from "./feed/UserProfile.js"
+import { userDropDown, UserChoice } from "./nav/Footer.js"
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
 
@@ -22,8 +23,12 @@ export const GiffyGram = () => {
     <!-- Calling the function that displays posts in feed -->
     <section class="postFeed">
     ${giffyGramFeed()}
-    </section>`
+    </section>
 
+    <section class="footer">
+    ${userDropDown()}
+    
+    </section>`
     return html
 }
 
@@ -54,7 +59,18 @@ mainContainer.addEventListener("click", clickEvent => {
 
 })
 
+document.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.name === "User") {
 
+            setFeed(parseInt(event.target.value))
+            document.querySelector(".giffygram").innerHTML=UserChoice()
+
+
+        }
+    }
+)
 
 
 

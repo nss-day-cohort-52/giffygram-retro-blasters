@@ -36,6 +36,10 @@ export const getUserProfile = () => {
 
 
 
+export const getFeed = () => {
+    return applicationState.feed
+}
+
 // Set Functions
 export const setCurrentUser = (id) => {
     applicationState.currentUser.userId = id
@@ -45,6 +49,9 @@ export const setUserProfile = (id) => {
     applicationState.userProfile.userId = id
 }
 
+export const setFeed = (id) => {
+    applicationState.feed.chosenUser = id
+}
 
 
 

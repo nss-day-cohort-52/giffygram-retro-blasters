@@ -1,6 +1,7 @@
 import { getUsers, setCurrentUser } from "../data/provider.js"
 
 // Targets when someone tries to login
+
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
         let foundUser = null
@@ -17,7 +18,6 @@ document.addEventListener("click", clickEvent => {
 
         if (foundUser !== null) {
             localStorage.setItem("gg_user", foundUser.id)
-            setCurrentUser(foundUser.id)
             document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
         }
     }

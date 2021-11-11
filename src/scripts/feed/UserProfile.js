@@ -2,27 +2,28 @@ import { getUsers, getPosts, getCurrentUser, getUserProfile} from '../data/provi
 
 const mainContainer = document.querySelector(".giffygram")
 
-
-const currentUser = getCurrentUser()
-const posts = getPosts()
-
-
-
 export const userProfile = () => {
     const users = getUsers()
     const profile = getUserProfile()
+    const posts = getPosts()
 
     let html = `<section class="userProfilePage"> `
 
-    //Prints the user name
-    for (const user of users) {
-        if (user.id === profile.userId) {
-            html += `<h1>${user.name}</h1>`
-        }
-        
-    }
+    //Find user name
+    const foundUser = users.find(
+        (user) => {
+            return user.id === profile.userId
+        })
 
-    //Prints number of posts
+    //Creates an array of posts
+    const userPosts = posts.filter(
+        (post) => {
+            return post.userId === foundUser.id
+        })
+
+     //Prints the user name
+     html += `<h1>${foundUser.name}</h1>
+            <h4>Number of Posts: ${userPosts.length}`
 
         
 

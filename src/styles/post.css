@@ -1,10 +1,15 @@
-.miniMode {
+.postForm {
     padding: 1rem;
     margin: 0 25%;
     border: 1px dashed slategrey;
     border-radius: 0.5rem;
     text-align: center;
     cursor: pointer;
+}
+
+#description {
+    height: 50px;
+    width: 40%; 
 }
 
 .newPost {

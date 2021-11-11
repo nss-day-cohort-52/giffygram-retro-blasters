@@ -23,7 +23,7 @@ export const PostForm = () => {
         </div>
         <div class="field">
             <label class="label" for="postStory">Story</label>
-            <textarea name="postStory" class="input" row="30" col="60"/>
+            <textarea id="description" name="postStory" class="input"/>
             </textarea>
         </div>
        
@@ -39,16 +39,14 @@ const mainContainer = document.querySelector(".giffygram")
 
 mainContainer.addEventListener("click", clickEvent => {
     const users = getUsers()
-    const currentUser = getCurrentUser()
+    const currentUser = localStorage.getItem('gg_user');
     if (clickEvent.target.id === "saveButton") {
         // Get what the user typed into the form fields querySelector searches document
         const titlePost = document.querySelector("input[name='postTitle']").value
         const urlPost = document.querySelector("input[name='postURL']").value
         const storyPost = document.querySelector("textarea[name='postStory']").value
         const date = new Date().toLocaleDateString();
-        const findUser = users.find((user) => currentUser.userId === user.id)
-
-        
+        const findUser = users.find((user) => parseInt(currentUser) === user.id)
 
 
         // Make an object out of the user input
@@ -67,6 +65,12 @@ mainContainer.addEventListener("click", clickEvent => {
 })
 
 
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "cancelButton") {
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
 
+
+})
 
 
