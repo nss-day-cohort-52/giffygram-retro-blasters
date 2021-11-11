@@ -19,5 +19,7 @@
       password: "jake"
     }
 
-  ]
+  ],
+  
+  "posts": []
 }
