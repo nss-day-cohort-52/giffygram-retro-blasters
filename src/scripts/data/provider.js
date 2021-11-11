@@ -29,6 +29,10 @@ export const getCurrentUser = () => {
     return applicationState.currentUser
 }
 
+export const getFeed = () => {
+    return applicationState.feed
+}
+
 // Set Functions
 export const setCurrentUser = (id) => {
     applicationState.currentUser.userId = id
@@ -37,6 +41,14 @@ export const setCurrentUser = (id) => {
 export const setFavorites = (id) => {
     applicationState.favorites.favoriteId = id
 }
+
+export const setFeed = (id) => {
+    applicationState.feed.chosenUser = id
+}
+
+
+
+
 
 // Fetches
 export const fetchUsers = () => {

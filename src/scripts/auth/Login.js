@@ -1,6 +1,7 @@
 import { getUsers, setCurrentUser } from "../data/provider.js"
 
 // Targets when someone tries to login
+
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
         let foundUser = null

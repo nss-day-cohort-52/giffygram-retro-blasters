@@ -47,10 +47,6 @@ mainContainer.addEventListener("click", clickEvent => {
         const storyPost = document.querySelector("textarea[name='postStory']").value
         const date = new Date().toLocaleDateString();
         const findUser = users.find((user) => parseInt(currentUser)  === user.id)
-        
-
-        
-
 
         // Make an object out of the user input
         const dataToSendToAPI = {
@@ -60,7 +56,7 @@ mainContainer.addEventListener("click", clickEvent => {
             postDate: date,
             foundUser: findUser.name,
             userId: findUser.id
-            
+           
         }
         // calling SendPost (in database) with object created 
         sendPost(dataToSendToAPI)
