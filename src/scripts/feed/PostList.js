@@ -1,5 +1,9 @@
 
-import { getPosts } from "../data/provider.js"
+import { getPosts, getFavorites } from "../data/provider.js"
+const posts = getPosts()
+const favorites = getFavorites()
+const emptyStar = "./images/favorite-star-blank.svg"
+const yellowStar = "./images/favorite-star-yellow.svg"
 
 // Defining the giffyGramFeed function
 export const giffyGramFeed = () => {
@@ -13,13 +17,15 @@ export const giffyGramFeed = () => {
         // iterate through each post 
         for (const post of posts) {
             // posting feed content for post 
-            html += `<h3> ${post.title}</h3> <img class="gif" src="${post.url}"> <p>${post.story}</p> <p>posted by: ${post.foundUser} on ${post.postDate}</p><img class="favorites" src="./images/favorite-star-blank.svg">`
-
+            html += `<h3> ${post.title}</h3> <img class="gif" src="${post.url}"> <p>${post.story}</p> <p>posted by: ${post.foundUser} on ${post.postDate}</p>`
+            if(post.id === favorites.favoriteId){
+          html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${yellowStar}">`
+        } else {
+          html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${emptyStar}">`
+        }
         }
         return html
     }
     html += `</section>`
 }
-
-
 

@@ -11,7 +11,8 @@ export const applicationState = {
         displayMessages: false
     },
     users: [],
-    posts: []
+    posts: [],
+    favorites: {}
 }
 
 
@@ -28,6 +29,10 @@ export const getCurrentUser = () => {
     return applicationState.currentUser
 }
 
+export const getFavorites = () => {
+    return applicationState.favorites
+}
+
 export const getFeed = () => {
     return applicationState.feed
 }
@@ -36,6 +41,12 @@ export const getFeed = () => {
 export const setCurrentUser = (id) => {
     applicationState.currentUser.userId = id
 }
+
+export const setFavorites = (id) => {
+    applicationState.favorites.favoriteId = id
+}
+
+
 
 export const setFeed = (id) => {
     applicationState.feed.chosenUser = id

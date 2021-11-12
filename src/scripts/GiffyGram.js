@@ -1,5 +1,5 @@
 import { PostForm } from "./message/MessageForm.js"
-import { getPosts, setFeed} from "./data/provider.js"
+import { getPosts, setFavorites, setFeed} from "./data/provider.js"
 import { giffyGramFeed } from "./feed/PostList.js"
 import { userDropDown, UserChoice } from "./nav/Footer.js"
 // Finding and selecting Main Container 
@@ -62,3 +62,11 @@ document.addEventListener(
 )
 
 
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.name === "favoriteStarBlank") {
+        
+        
+        setFavorites(parseInt(clickEvent.target.id))
+        document.querySelector(".giffygram .postFeed").innerHTML = giffyGramFeed()
+    }
+})
