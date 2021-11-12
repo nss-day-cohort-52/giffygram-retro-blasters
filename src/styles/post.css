@@ -72,3 +72,9 @@
     font-size: 2em;
     margin: 1em 0 0.5em 0;
 }
+
+.favorites {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}

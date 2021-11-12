@@ -1,4 +1,8 @@
-import { getPosts } from "../data/provider.js"
+import { getPosts, getFavorites } from "../data/provider.js"
+const posts = getPosts()
+const favorites = getFavorites()
+const emptyStar = "./images/favorite-star-blank.svg"
+const yellowStar = "./images/favorite-star-yellow.svg"
 
 
 
@@ -23,8 +27,14 @@ export const giffyGramFeed = () => {
                 <a href="#" class="userName" name="userProfile" id=${post.userId}>${post.foundUser}  </a>
                 on ${post.postDate}
             </section>
-            <img class="favorites" src="./images/favorite-star-blank.svg">`
+            `
 
+            html += `<h3> ${post.title}</h3> <img class="gif" src="${post.url}"> <p>${post.story}</p> <p>posted by: ${post.foundUser} on ${post.postDate}</p>`
+            if(post.id === favorites.favoriteId){
+          html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${yellowStar}">`
+        } else {
+          html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${emptyStar}">`
+        }
         }
         return html
     }
