@@ -5,6 +5,7 @@ const mainContainer = document.querySelector(".giffygram")
 
 export const applicationState = {
     currentUser: {},
+    userProfile: {},
     feed: {
         chosenUser: null,
         displayFavorites: false,
@@ -29,6 +30,13 @@ export const getCurrentUser = () => {
     return applicationState.currentUser
 }
 
+export const getUserProfile = () => {
+    return applicationState.userProfile
+}
+
+
+
+
 export const getFavorites = () => {
     return applicationState.favorites
 }
@@ -40,6 +48,10 @@ export const getFeed = () => {
 // Set Functions
 export const setCurrentUser = (id) => {
     applicationState.currentUser.userId = id
+}
+
+export const setUserProfile = (id) => {
+    applicationState.userProfile.userId = id
 }
 
 export const setFavorites = (id) => {

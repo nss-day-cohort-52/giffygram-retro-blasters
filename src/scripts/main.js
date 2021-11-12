@@ -11,7 +11,7 @@ const mainContainer = document.querySelector(".giffygram")
 // Function to Render whole site 
 export const renderApp = () => {
     // looking to see if there is a current user object 
-    const currentUser = localStorage.getItem('gg_user')
+    const currentUser = localStorage.getItem('gg_user');
     // retrieve the users from the api 
     fetchUsers().then(
         () => {
@@ -32,7 +32,6 @@ export const renderApp = () => {
         }
         
         )
-        console.log(applicationState.posts)
     }
     // Automatic Render for Page 
     renderApp()

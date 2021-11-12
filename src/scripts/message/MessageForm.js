@@ -14,17 +14,13 @@ import { getUsers, sendPost, getCurrentUser} from "../data/provider.js"
 export const PostForm = () => {
     let html = `
         <div class="field">
-            <label class="label" for="postTitle">Title</label>
-            <input type="text" name="postTitle" class="input" />
+            <input type="text" name="postTitle" class="newPost__input" placeholder="Title"/>
         </div>
         <div class="field">
-            <label class="label" for="postURL">URL</label>
-            <input type="text" name="postURL" class="input" />
+            <input type="text" name="postURL" class="newPost__input" placeholder="URL of gif"/>URL
         </div>
         <div class="field">
-            <label class="label" for="postStory">Story</label>
-            <textarea name="postStory" class="input" row="30" col="60"/>
-            </textarea>
+            <textarea class="newPost__input newPost__description" name="postStory" class="input" placeholder="Story behind your gif..."/></textarea>
         </div>
        
         <button class="button" id="saveButton">Save</button>
@@ -39,14 +35,15 @@ const mainContainer = document.querySelector(".giffygram")
 
 mainContainer.addEventListener("click", clickEvent => {
     const users = getUsers()
-    const currentUser = localStorage.getItem('gg_user')
+    const currentUser = localStorage.getItem('gg_user');
     if (clickEvent.target.id === "saveButton") {
         // Get what the user typed into the form fields querySelector searches document
         const titlePost = document.querySelector("input[name='postTitle']").value
         const urlPost = document.querySelector("input[name='postURL']").value
         const storyPost = document.querySelector("textarea[name='postStory']").value
         const date = new Date().toLocaleDateString();
-        const findUser = users.find((user) => parseInt(currentUser)  === user.id)
+        const findUser = users.find((user) => parseInt(currentUser) === user.id)
+
 
         // Make an object out of the user input
         const dataToSendToAPI = {
@@ -64,6 +61,12 @@ mainContainer.addEventListener("click", clickEvent => {
 })
 
 
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "cancelButton") {
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
 
+
+})
 
 
