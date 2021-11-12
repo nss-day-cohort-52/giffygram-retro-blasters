@@ -13,6 +13,7 @@ export const applicationState = {
     },
     users: [],
     posts: [],
+    messages: [],
     favorites: {}
 }
 
@@ -34,7 +35,9 @@ export const getUserProfile = () => {
     return applicationState.userProfile
 }
 
-
+export const getMessages = () => {
+    return applicationState.messages.map(user =>({...message }))
+}
 
 
 export const getFavorites = () => {
@@ -59,12 +62,13 @@ export const setFavorites = (id) => {
 }
 
 
-
 export const setFeed = (id) => {
     applicationState.feed.chosenUser = id
 }
 
-
+export const setMessage = (id) => {
+    applicationState.messages.messageId = id
+}
 
 
 
@@ -87,6 +91,17 @@ export const fetchPosts = () => {
         .then(
             (posts) => {
                 applicationState.posts = posts
+            }
+        )
+
+}
+
+export const fetchMessages = () => {
+    return fetch(`${apiURL}/messages`)
+        .then(response => response.json())
+        .then(
+            (messages) => {
+                applicationState.messages = messages
             }
         )
 
@@ -116,3 +131,37 @@ export const sendPost = (userPost) => {
 
         )
 }
+
+// Posting whatever object gets put into the parameter into the API 
+export const sendMessage = (userPost) => {
+    // directions for the API 
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userPost)
+    }
+    // fetching the post table & telling the API to post the object into the post table
+    return fetch(`${apiURL}/messages`, fetchOptions)
+        .then(response => response.json())
+        // rerendering the page due to post page being updated
+        .then(
+            () => 
+                { mainContainer.dispatchEvent(new CustomEvent("stateChanged")) }
+
+
+
+
+        )
+}
+
+export const deletePosts = (id) => {
+    return fetch(`${API}/posts/${id}`, { method: "DELETE" })
+        .then(
+            () => {
+                mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+

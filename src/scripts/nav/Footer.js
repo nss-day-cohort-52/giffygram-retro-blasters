@@ -1,7 +1,4 @@
-import { getPosts, getUsers,  getFeed } from "../data/provider.js"
-
-
-
+import { getPosts, getUsers,  getFeed, setFeed } from "../data/provider.js"
 
 // exporting a function that maps over the Users Array to display each user name
 
@@ -30,7 +27,6 @@ export const userDropDown = () => {
     `
     
 }
-
 
 
 export const UserChoice = () => {
@@ -77,11 +73,22 @@ export const UserChoice = () => {
         return html
     
 
-}
+
+    }
 
 
+document.addEventListener(
+    "change",
+    (event) => {
+        // listening for "User" which is the dropdown
+        if (event.target.name === "User") {
+    //  setFeed is setting who ever you clicked on - setting the value of that user
+            setFeed(parseInt(event.target.value))
+            // runs the UserChoice function which returns the HTML in GiffyGram Feed
+            document.querySelector(".giffygram__feed").innerHTML=UserChoice()
+            
 
+        }
+    }
 
-
-
-
+)

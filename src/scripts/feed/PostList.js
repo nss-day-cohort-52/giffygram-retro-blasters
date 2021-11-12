@@ -3,6 +3,7 @@ const posts = getPosts()
 const favorites = getFavorites()
 const emptyStar = "./images/favorite-star-blank.svg"
 const yellowStar = "./images/favorite-star-yellow.svg"
+const trash = "./images/block.svg"
 
 
 
@@ -41,9 +42,21 @@ export const giffyGramFeed = () => {
 }
 
 
+export const Requests = () => {
+    const requests = getRequests()
+    const convertRequestToListElement = (post) => {   
+return `<li>
+<button class="post__delete"
+id="post--${post.id}">
+<img id="{post.id}" name="trashcan" value="{post.id}" class="delete" src="${trash}">
+</button>
+</li>`
+
+    }
 
 
 
+}
 
 
 
