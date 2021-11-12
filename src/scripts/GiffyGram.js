@@ -1,10 +1,12 @@
 import { PostForm } from "./message/MessageForm.js"
-import { getPosts, setFavorites, setFeed} from "./data/provider.js"
+import { getPosts, setFavorites, setFeed,  setPostMessage } from "./data/provider.js"
 import { giffyGramFeed } from "./feed/PostList.js"
 import { setUserProfile } from "./data/provider.js"
 import { userProfile } from "./feed/UserProfile.js"
 import { userDropDown, UserChoice } from "./nav/Footer.js"
 import { navBar } from "./nav/navBar.js"
+import { DirectMessage } from "./friends/DirectMessage.js"
+import { getPostMessage } from "./data/provider.js"
 
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
@@ -13,6 +15,7 @@ const mainContainer = document.querySelector(".giffygram")
 // Defining function to return the Post Form button HTML 
 
 export const GiffyGram = () => {
+    const postState = getPostMessage()
     // setting HTML to empty string
     let html = ""
     //   setting HTML for the post form section (button)
@@ -25,19 +28,27 @@ export const GiffyGram = () => {
     
     <section class="postForm">
     <div class="miniMode" id="miniMode">Have a gif to post?</div>
-    </section>
+    </section>`
+    if (postState) {
+        html += DirectMessage()
+       
+    } else {
+        // runs the Login Form again if false 
+        `<!-- Calling the function that displays posts in feed -->
+        <section class="postFeed">`
+       html += giffyGramFeed()
+    }
 
-    <!-- Calling the function that displays posts in feed -->
-    <section class="postFeed">
-    ${giffyGramFeed()}
-    </section>
+    html += `</section>
     </div>
     <footer class="footer">
     ${userDropDown()}
     
     </footer>`
+    setPostMessage(0); 
     return html
 }
+
 
 
 
@@ -99,3 +110,12 @@ mainContainer.addEventListener("click", clickEvent => {
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
+
+
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessageIcon") {
+        document.querySelector(".giffygram__feed").innerHTML=DirectMessage()
+    }
+})
+
