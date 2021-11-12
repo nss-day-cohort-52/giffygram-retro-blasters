@@ -1,44 +1,43 @@
-import { getPosts, getFavorites } from "../data/provider.js"
+import { getPosts, getFavorites, getUsers, getCurrentUser } from "../data/provider.js"
+import { giffyGramFeed } from "./post.js"
 const posts = getPosts()
 const favorites = getFavorites()
 const emptyStar = "./images/favorite-star-blank.svg"
 const yellowStar = "./images/favorite-star-yellow.svg"
-const trash = "./images/block.svg"
+const mainContainer = document.querySelector(".giffygram")
 
 
+export const PostList = () => {
+    const allPosts = getPosts()
+    const userLikes = getFavorites()
+    const users = getUsers()
+    const currentUser = parseInt(localStorage.getItem('gg_user'));
 
-// Defining the giffyGramFeed function
-export const giffyGramFeed = () => {
-    // setting the posts variable to get the Posts
-    const posts = getPosts()
-    // declaring an empty variable for HTML
-    let html = ""
-    html = `<section class="feed">`
-    // if there's posts in the array
-    if (posts.length > 0) {
-        // iterate through each post 
-        for (const post of posts) {
-            // posting feed content for post 
-            html +=
-                `<h3> ${post.title}</h3> 
-            <img class="gif" src="${post.url}"> 
-            <p>${post.story}</p> 
-            <section class="post__tagline" class="post__tagline">
-                Posted by:
-                <a href="#" class="userName" name="userProfile" id=${post.userId}>${post.foundUser}  </a>
-                on ${post.postDate}
-            </section>
-            `
-            if(post.id === favorites.favoriteId){
-          html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${yellowStar}">`
-        } else {
-          html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${emptyStar}">`
+    return `
+        ${
+            allPosts.map(
+                currentPost => {
+                    /*
+                        Determine if the current post is favorited by the current user
+                        then add a new `favoriteId` property for use when generating the
+                        HTML representation. Default to 0 if post not favorited.
+                    */
+                   currentPost.favoriteId = userLikes.find(like =>
+                        like.userId === currentUser &&
+                        like.postId === currentPost.id
+                    )?.id || 0
+                    /*
+                        Who created this post? Add a new `user` property for use when
+                        generating the HTML representation
+                    */
+                    currentPost.user = users.find(u => u.id === currentPost.userId)
+                    // Generate the HTML representation for the current post
+                    
+                    return giffyGramFeed(currentPost)
+                }
+            ).join("")
         }
-        }
-        return html
-    }
-    html += `</section>`
-    return html
+    `
 }
 
 
@@ -54,6 +53,20 @@ id="post--${post.id}">
 
     }
 
+    // mainContainer.addEventListener("click", clickEvent => {
+    //     const posts = getPosts()
+
+    //     if (clickEvent.target.name === "favoriteStarBlank") {
+    //         setFavorites(parseInt(clickEvent.target.id))
+    //         setFavoritePost(parseInt(clickEvent.target.id))
+    //         setFavoriteUser(parseInt(clickEvent.target.value))
+    //         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+
+
+
+    //         sendFavorite()
+    //     }
+    // })
 
 
 }
