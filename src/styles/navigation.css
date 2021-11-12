@@ -1,4 +1,4 @@
-.navigation {
+.navBar {
     display: flex;
     flex-wrap: nowrap;
     justify-content: start;
@@ -13,8 +13,8 @@
     margin: auto;
 }
 
-.navigation__item {
-    vertical-align: baseline;
+.navigation__item{
+    vertical-align: baseline; 
 }
 
 .navigation__name {

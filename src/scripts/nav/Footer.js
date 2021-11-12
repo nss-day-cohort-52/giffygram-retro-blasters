@@ -11,6 +11,7 @@ export const userDropDown = () => {
     const allPosts = getPosts()
     let html = ""
 
+<<<<<<< HEAD
     
     html += `<h3>Posts by user</h3>`
     html += ` <select name="User" id="Users">`
@@ -31,6 +32,23 @@ export const userDropDown = () => {
     }
     
  return html
+=======
+    return `
+    <h3 class="footer__item">Posts by user</h3>
+    <select name="User" id="Users">
+        <option class="footer__item" value="0">--Choose A User--</option>
+        ${userChoice.map(
+        (userObj) => {
+            return `
+                    <option value="${userObj.id}">${userObj.name}</option>`
+
+        }
+    )
+        }
+    </select>
+    `
+
+>>>>>>> main
 }
 
 
