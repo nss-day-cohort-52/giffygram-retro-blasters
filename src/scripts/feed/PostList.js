@@ -1,5 +1,6 @@
 
 import { getPosts } from "../data/provider.js"
+import { userDropDown } from "../nav/Footer.js"
 
 // Defining the giffyGramFeed function
 export const giffyGramFeed = () => {
@@ -20,6 +21,5 @@ export const giffyGramFeed = () => {
     }
     html += `</section>`
 }
-
 
 

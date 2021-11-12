@@ -8,22 +8,29 @@ import { getPosts, getUsers,  getFeed } from "../data/provider.js"
 export const userDropDown = () => {
 
     const userChoice = getUsers()
+    const allPosts = getPosts()
+    let html = ""
 
-    return `
-    <h3>Posts by user</h3>
-    <select name="User" id="Users">
-        <option value="0">--Choose A User--</option>
-        ${userChoice.map(
-        (userObj) => {
-            return `
-                    <option value="${userObj.id}">${userObj.name}</option>`
-
-        }
-    )
-        }
-    </select>
-    `
-
+    
+    html += `<h3>Posts by user</h3>`
+    html += ` <select name="User" id="Users">`
+    for (const post of allPosts) {
+             html += `<option value="0">--Choose A User--</option>
+             <option value=${post.id}> All Posts </option>
+             ${userChoice.map(
+             (userObj) => {
+                 return `
+                         <option value="${userObj.id}">${userObj.name}</option>`
+     
+             }
+         )
+             }
+         </select>
+         `
+        
+    }
+    
+ return html
 }
 
 
@@ -57,12 +64,18 @@ export const UserChoice = () => {
             let html=""
         for (const foundPost of foundPostArray) {
             // posting feed content for post 
-            html += `<h3> ${foundPost.title}</h3> <img class="gif" src="${foundPost.url}"> <p>${foundPost.story}</p> <p>Posted by: ${foundPost.foundUser} on ${foundPost.Date}</p><img class="favorites" src="./images/favorite-star-blank.svg">`
+            html += `<h3> ${foundPost.title}</h3> <img class="gif" src="${foundPost.url}"> <p>${foundPost.story}</p> <p>Posted by: ${foundPost.foundUser} on ${foundPost.Date}</p><img class="favorites" src="./images/favorite-star-blank.svg">
+            
+     <section class="footer">
+    ${userDropDown()}
+       </section>`
+            
+            
 
         }
         return html
     
-   return html
+
 }
 
 

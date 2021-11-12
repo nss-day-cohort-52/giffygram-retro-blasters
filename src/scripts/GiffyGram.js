@@ -1,7 +1,7 @@
 import { PostForm } from "./message/MessageForm.js"
 import { getPosts, setFeed} from "./data/provider.js"
 import { giffyGramFeed } from "./feed/PostList.js"
-import { userDropDown, UserChoice } from "./nav/Footer.js"
+import { userDropDown, UserChoice, } from "./nav/Footer.js"
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
 
@@ -55,10 +55,15 @@ document.addEventListener(
 
             setFeed(parseInt(event.target.value))
             document.querySelector(".giffygram").innerHTML=UserChoice()
+            
 
 
         }
     }
 )
+
+
+
+
 
 
