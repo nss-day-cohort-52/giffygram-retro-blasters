@@ -86,13 +86,13 @@ document.addEventListener(
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
         
     }
+}
+  )
 
 
 mainContainer.addEventListener("click", clickEvent => {
     if (clickEvent.target.name === "favoriteStarBlank") {
-        
-        
         setFavorites(parseInt(clickEvent.target.id))
-        document.querySelector(".giffygram .postFeed").innerHTML = giffyGramFeed()
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     }
 })

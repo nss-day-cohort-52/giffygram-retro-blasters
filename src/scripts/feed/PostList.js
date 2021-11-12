@@ -28,8 +28,6 @@ export const giffyGramFeed = () => {
                 on ${post.postDate}
             </section>
             `
-
-            html += `<h3> ${post.title}</h3> <img class="gif" src="${post.url}"> <p>${post.story}</p> <p>posted by: ${post.foundUser} on ${post.postDate}</p>`
             if(post.id === favorites.favoriteId){
           html +=  `<img id="${post.id}" name="favoriteStarBlank" value="${post.id}" class="favorites" src="${yellowStar}">`
         } else {
