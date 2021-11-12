@@ -1,3 +1,5 @@
+
+
 const apiURL = "http://localhost:3000"
 const mainContainer = document.querySelector(".giffygram")
 
@@ -13,7 +15,8 @@ export const applicationState = {
     },
     users: [],
     posts: [],
-    favorites: {}
+    favorites: [],
+    
 }
 
 
@@ -38,7 +41,7 @@ export const getUserProfile = () => {
 
 
 export const getFavorites = () => {
-    return applicationState.favorites
+    return applicationState.favorites.map(favorite => ({...favorite}))
 }
 
 export const getFeed = () => {
@@ -58,6 +61,13 @@ export const setFavorites = (id) => {
     applicationState.favorites.favoriteId = id
 }
 
+export const setFavoriteUser = (id) => {
+    applicationState.favorites.userId = id
+}
+
+export const setFavoritePost = (id) => {
+    applicationState.favorites.postId = id
+}
 
 
 export const setFeed = (id) => {
@@ -92,6 +102,17 @@ export const fetchPosts = () => {
 
 }
 
+export const fetchFavorites = () => {
+    return fetch(`${apiURL}/favorites`)
+        .then(response => response.json())
+        .then(
+            (favorites) => {
+                applicationState.favorites = favorites
+            }
+        )
+
+}
+
 
 // Posting whatever object gets put into the parameter into the API 
 export const sendPost = (userPost) => {
@@ -115,4 +136,54 @@ export const sendPost = (userPost) => {
 
 
         )
+}
+
+export const sendFavorite = (userFavorite) => {
+    // directions for the API 
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userFavorite)
+    }
+    // fetching the post table & telling the API to post the object into the post table
+    return fetch(`${apiURL}/favorites`, fetchOptions)
+        .then(response => response.json())
+        // rerendering the page due to post page being updated
+        .then(
+            () => 
+                { mainContainer.dispatchEvent(new CustomEvent("stateChanged")) }
+
+
+
+
+        )
+}
+
+export const favoritePost = (id) => {
+    // return fetch(`${Settings.apiURL}/likes`, {
+        const favoriteUser = localStorage.getItem('gg_user');
+        const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userId: parseInt(favoriteUser),
+            postId: id
+        })
+    }
+    return fetch(`${apiURL}/favorites`, fetchOptions)
+    .then(response => response.json())
+        .then(() => {
+            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const unfavoritePost = (id) => {
+    return fetch(`${apiURL}/favorites/${id}`, { method: "DELETE" })
+        .then(() => {
+            mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+        })
 }

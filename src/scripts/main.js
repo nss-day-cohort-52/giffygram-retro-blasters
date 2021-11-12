@@ -1,6 +1,6 @@
 import { GiffyGram} from "./GiffyGram.js"
 import { LoginForm } from "./auth/Login.js"
-import { fetchPosts, fetchUsers, getUsers } from "./data/provider.js"
+import { fetchFavorites, fetchPosts, fetchUsers, getUsers } from "./data/provider.js"
 import { getCurrentUser } from "./data/provider.js"
 import { applicationState } from "./data/provider.js"
 
@@ -19,6 +19,9 @@ export const renderApp = () => {
          return fetchPosts()
         })
         .then(
+            () => {
+            return fetchFavorites()
+            }).then(
             () => {
             // if current user id is "truthy" (exists) 
             if (currentUser) {

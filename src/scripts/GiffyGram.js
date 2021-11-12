@@ -1,10 +1,11 @@
 import { PostForm } from "./message/MessageForm.js"
-import { getPosts, setFavorites, setFeed} from "./data/provider.js"
-import { giffyGramFeed } from "./feed/PostList.js"
+import { getPosts, sendFavorite, setFavoritePost, setFavorites, setFeed, setFavoriteUser} from "./data/provider.js"
+import { giffyGramFeed } from "./feed/post.js"
 import { setUserProfile } from "./data/provider.js"
 import { userProfile } from "./feed/UserProfile.js"
 import { userDropDown, UserChoice } from "./nav/Footer.js"
 import { navBar } from "./nav/navBar.js"
+import { PostList } from "./feed/PostList.js"
 
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
@@ -29,7 +30,7 @@ export const GiffyGram = () => {
 
     <!-- Calling the function that displays posts in feed -->
     <section class="postFeed">
-    ${giffyGramFeed()}
+    ${PostList()}
     </section>
     </div>
     <footer class="footer">
@@ -90,9 +91,3 @@ document.addEventListener(
   )
 
 
-mainContainer.addEventListener("click", clickEvent => {
-    if (clickEvent.target.name === "favoriteStarBlank") {
-        setFavorites(parseInt(clickEvent.target.id))
-        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
-    }
-})
