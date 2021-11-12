@@ -69,17 +69,20 @@ mainContainer.addEventListener("click", clickEvent => {
 document.addEventListener(
     "change",
     (event) => {
+        // listening for "User" which is the dropdown
         if (event.target.name === "User") {
-
+    //  setFeed is setting who ever you clicked on - setting the value of that user
             setFeed(parseInt(event.target.value))
+            // runs the UserChoice function which returns the HTML in GiffyGram Feed
             document.querySelector(".giffygram__feed").innerHTML=UserChoice()
-
+            
 
         }
     }
 )
+    
 
-
+    
   mainContainer.addEventListener("click", clickEvent => {
 
     if (clickEvent.target.id === "logo") {
