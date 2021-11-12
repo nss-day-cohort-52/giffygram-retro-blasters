@@ -18,10 +18,10 @@ export const giffyGramFeed = () => {
                 `<h3> ${post.title}</h3> 
             <img class="gif" src="${post.url}"> 
             <p>${post.story}</p> 
-            <section class="postInfo">
-                <p class="postedBy">posted by:  </p>
-                <button class="userName" name="userProfile" value=${post.userId}>${post.foundUser}  </button>
-                <p class="postDate"> on ${post.postDate}</p>
+            <section class="post__tagline" class="post__tagline">
+                Posted by:
+                <a href="#" class="userName" name="userProfile" id=${post.userId}>${post.foundUser}  </a>
+                on ${post.postDate}
             </section>
             <img class="favorites" src="./images/favorite-star-blank.svg">`
 

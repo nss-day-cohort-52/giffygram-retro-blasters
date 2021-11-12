@@ -1,4 +1,4 @@
-.postForm {
+.miniMode {
     padding: 1rem;
     margin: 0 25%;
     border: 1px dashed slategrey;
@@ -7,17 +7,12 @@
     cursor: pointer;
 }
 
-#description {
-    height: 50px;
-    width: 40%; 
-}
-
 .newPost {
     margin: 0 25%;
 }
 
 .newPost__input {
-    width: 30rem;
+    width: 100%;
     margin: 0.5rem 0;
 }
 

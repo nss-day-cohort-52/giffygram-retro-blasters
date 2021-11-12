@@ -14,17 +14,13 @@ import { getUsers, sendPost, getCurrentUser} from "../data/provider.js"
 export const PostForm = () => {
     let html = `
         <div class="field">
-            <label class="label" for="postTitle">Title</label>
-            <input type="text" name="postTitle" class="input" />
+            <input type="text" name="postTitle" class="newPost__input" placeholder="Title"/>
         </div>
         <div class="field">
-            <label class="label" for="postURL">URL</label>
-            <input type="text" name="postURL" class="input" />
+            <input type="text" name="postURL" class="newPost__input" placeholder="URL of gif"/>URL
         </div>
         <div class="field">
-            <label class="label" for="postStory">Story</label>
-            <textarea id="description" name="postStory" class="input"/>
-            </textarea>
+            <textarea class="newPost__input newPost__description" name="postStory" class="input" placeholder="Story behind your gif..."/></textarea>
         </div>
        
         <button class="button" id="saveButton">Save</button>

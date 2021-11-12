@@ -4,6 +4,8 @@ import { giffyGramFeed } from "./feed/PostList.js"
 import { setUserProfile } from "./data/provider.js"
 import { userProfile } from "./feed/UserProfile.js"
 import { userDropDown, UserChoice } from "./nav/Footer.js"
+import { navBar } from "./nav/navBar.js"
+
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
 
@@ -15,20 +17,25 @@ export const GiffyGram = () => {
     let html = ""
     //   setting HTML for the post form section (button)
     html += `
+    <nav class="navBar">
+    ${navBar()}
+    </nav>
+
+    <div class="giffygram__feed">
+    
     <section class="postForm">
-    <h1>Giffygram</h1>
-    <button class="button" id="postButton">Have a gif to post?</button>
+    <div class="miniMode" id="miniMode">Have a gif to post?</div>
     </section>
 
     <!-- Calling the function that displays posts in feed -->
     <section class="postFeed">
     ${giffyGramFeed()}
     </section>
-
-    <section class="footer">
+    </div>
+    <footer class="footer">
     ${userDropDown()}
     
-    </section>`
+    </footer>`
     return html
 }
 
@@ -38,10 +45,10 @@ export const GiffyGram = () => {
 // Listening to see if Post Form button is clicked 
 mainContainer.addEventListener("click", click => {
     // If Post Form button is clicked
-    if (click.target.id === "postButton") {
+    if (click.target.id === "miniMode") {
         // Search through entire page and find the giffygram class - go into class - find postForm class
         // set container = the Post Form HTML 
-        document.querySelector(".giffygram .postForm").innerHTML = PostForm()
+        document.querySelector(".giffygram__feed .miniMode").innerHTML = PostForm()
 
     }
 })
@@ -51,8 +58,8 @@ mainContainer.addEventListener("click", click => {
 mainContainer.addEventListener("click", clickEvent => {
 
     if (clickEvent.target.name === "userProfile") {
-        setUserProfile(parseInt(clickEvent.target.value))
-        document.querySelector(".giffygram").innerHTML = userProfile()
+        setUserProfile(parseInt(clickEvent.target.id))
+        document.querySelector(".giffygram__feed").innerHTML = userProfile()
         
     }
 
@@ -65,7 +72,7 @@ document.addEventListener(
         if (event.target.name === "User") {
 
             setFeed(parseInt(event.target.value))
-            document.querySelector(".giffygram").innerHTML=UserChoice()
+            document.querySelector(".giffygram__feed").innerHTML=UserChoice()
 
 
         }
@@ -73,4 +80,12 @@ document.addEventListener(
 )
 
 
+  mainContainer.addEventListener("click", clickEvent => {
 
+    if (clickEvent.target.id === "logo") {
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+        
+    }
+
+
+})
