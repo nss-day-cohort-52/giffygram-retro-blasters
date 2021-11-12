@@ -6,74 +6,57 @@ import { getPosts, getUsers,  getFeed } from "../data/provider.js"
 // exporting a function that maps over the Users Array to display each user name
 
 export const userDropDown = () => {
-
-    const userChoice = getUsers()
-    const allPosts = getPosts()
-    let html = ""
-
-<<<<<<< HEAD
     
-    html += `<h3>Posts by user</h3>`
-    html += ` <select name="User" id="Users">`
-    for (const post of allPosts) {
-             html += `<option value="0">--Choose A User--</option>
-             <option value=${post.id}> All Posts </option>
-             ${userChoice.map(
-             (userObj) => {
-                 return `
-                         <option value="${userObj.id}">${userObj.name}</option>`
-     
-             }
-         )
-             }
-         </select>
-         `
-        
-    }
+    const feed = getFeed()
+    const users = getUsers()
+    const posts = getPosts()
+
     
- return html
-=======
     return `
     <h3 class="footer__item">Posts by user</h3>
     <select name="User" id="Users">
-        <option class="footer__item" value="0">--Choose A User--</option>
-        ${userChoice.map(
+    <option class="footer__item" value="0">--Choose A User--</option>
+    // setting the value to (any number)
+    <option value="0">All Posts</option>
+    ${users.map(
         (userObj) => {
             return `
-                    <option value="${userObj.id}">${userObj.name}</option>`
-
+            <option value="${userObj.id}">${userObj.name}</option>`
+            
         }
-    )
-        }
+        )
+    }
     </select>
     `
-
->>>>>>> main
+    
 }
 
 
 
 export const UserChoice = () => {
-
-
+    
+    
     const feed = getFeed()
     const users = getUsers()
     const posts = getPosts()
-
+    
     // finding the userId in the feed array that matches the chosen User from Droplist
-   
+    // if feed.chosenUser is equal to 0, rerendering the entire page 
+    if ( feed.chosenUser === 0){
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
 
-        const foundUser = users.find(
-            (user) => {
-                return feed.chosenUser === user.id
-
-            }
+    }
+    const foundUser = users.find(
+        (user) => {
+            return feed.chosenUser === user.id
+            
+        }
         )
-
+        
         // filtering the posts for any post that has a userId that matches the chosen User
         const foundPostArray = posts.filter(
             (post) => {
-            return post.userId === foundUser.id
+                return post.userId === foundUser.id
             }
 
         )
