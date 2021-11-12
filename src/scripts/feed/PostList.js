@@ -41,6 +41,17 @@ export const PostList = () => {
 }
 
 
+export const Requests = () => {
+    const requests = getRequests()
+    const convertRequestToListElement = (post) => {   
+return `<li>
+<button class="post__delete"
+id="post--${post.id}">
+<img id="{post.id}" name="trashcan" value="{post.id}" class="delete" src="${trash}">
+</button>
+</li>`
+
+    }
 
     // mainContainer.addEventListener("click", clickEvent => {
     //     const posts = getPosts()
@@ -58,6 +69,7 @@ export const PostList = () => {
     // })
 
 
+}
 
 
 

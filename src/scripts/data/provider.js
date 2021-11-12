@@ -37,7 +37,9 @@ export const getUserProfile = () => {
     return applicationState.userProfile
 }
 
-
+export const getMessages = () => {
+    return applicationState.messages.map(user =>({...message }))
+}
 
 
 export const getFavorites = () => {
@@ -69,12 +71,13 @@ export const setFavoritePost = (id) => {
     applicationState.favorites.postId = id
 }
 
-
 export const setFeed = (id) => {
     applicationState.feed.chosenUser = id
 }
 
-
+export const setMessage = (id) => {
+    applicationState.messages.messageId = id
+}
 
 
 

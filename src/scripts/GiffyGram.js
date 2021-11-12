@@ -54,6 +54,18 @@ mainContainer.addEventListener("click", click => {
     }
 })
 
+// document.querySelector(".giffygram .feed").innerHTML = html
+// Listening to see if Post Form button is clicked 
+mainContainer.addEventListener("click", click => {
+    // If Post Form button is clicked
+    if (click.target.id === "miniMode") {
+        // Search through entire page and find the giffygram class - go into class - find postForm class
+        // set container = the Post Form HTML 
+        document.querySelector(".giffygram__feed .miniMode").innerHTML = MessageForm()
+
+    }
+})
+
 
   //Listens to see if a user profile is being clicked on
 mainContainer.addEventListener("click", clickEvent => {
@@ -67,23 +79,7 @@ mainContainer.addEventListener("click", clickEvent => {
 
 })
 
-document.addEventListener(
-    "change",
-    (event) => {
-        // listening for "User" which is the dropdown
-        if (event.target.name === "User") {
-    //  setFeed is setting who ever you clicked on - setting the value of that user
-            setFeed(parseInt(event.target.value))
-            // runs the UserChoice function which returns the HTML in GiffyGram Feed
-            document.querySelector(".giffygram__feed").innerHTML=UserChoice()
-            
 
-        }
-    }
-)
-    
-
-    
   mainContainer.addEventListener("click", clickEvent => {
 
     if (clickEvent.target.id === "logo") {
