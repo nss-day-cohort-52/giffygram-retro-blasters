@@ -1,15 +1,14 @@
-import { getPosts, getUsers,  getFeed } from "../data/provider.js"
+import { getPosts, getUsers,  getFeed, setFeed, setFeedFavorite } from "../data/provider.js"
 
-
+const mainContainer = document.querySelector(".giffygram")
 
 
 // exporting a function that maps over the Users Array to display each user name
 
 export const userDropDown = () => {
     
-    const feed = getFeed()
     const users = getUsers()
-    const posts = getPosts()
+    const feed = getFeed()
 
     
     return `
@@ -20,8 +19,8 @@ export const userDropDown = () => {
     <option value="0">All Posts</option>
     ${users.map(
         (userObj) => {
-            return `
-            <option value="${userObj.id}">${userObj.name}</option>`
+            return feed.chosenUser === userObj.id ? `<option value="${userObj.id}" selected>${userObj.name}</option>`
+                                            : `<option value="${userObj.id}">${userObj.name}</option>`
             
         }
         )
@@ -30,6 +29,18 @@ export const userDropDown = () => {
     `
     
 }
+
+export const selectFavorites = () => {
+    const feed = getFeed()
+    let html = ""
+    html += `<label for="setFavorites" class="footer__item">Show Only Favorites</label>`
+    feed.displayFavorites ? html += `<input type="checkbox" class="footer__item" id="setFavorites" checked>` 
+                        : html += `<input type="checkbox" class="footer__item" id="setFavorites">`
+    return html
+    }
+
+            
+
 
 
 
@@ -46,13 +57,14 @@ export const UserChoice = () => {
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
 
     }
+
     const foundUser = users.find(
         (user) => {
             return feed.chosenUser === user.id
             
         }
         )
-        
+
         // filtering the posts for any post that has a userId that matches the chosen User
         const foundPostArray = posts.filter(
             (post) => {
@@ -60,27 +72,43 @@ export const UserChoice = () => {
             }
 
         )
+    
+        
+    return foundPostArray
 
-        // display filtered posts
-            let html=""
-        for (const foundPost of foundPostArray) {
-            // posting feed content for post 
-            html += `<h3> ${foundPost.title}</h3> <img class="gif" src="${foundPost.url}"> <p>${foundPost.story}</p> <p>Posted by: ${foundPost.foundUser} on ${foundPost.Date}</p><img class="favorites" src="./images/favorite-star-blank.svg">
-            
-     <section class="footer">
-    ${userDropDown()}
-       </section>`
-            
-            
-
-        }
-        return html
     
 
 }
 
+mainContainer.addEventListener("change", clickEvent => {
+    if (clickEvent.target.id === "setFavorites") {
+        // if checked
+        //setFavoriteState(true)
+        //else setFavoriteState(false)
+        let checkbox = document.querySelector("#setFavorites")
+        
+        checkbox.checked ? setFeedFavorite(true) : setFeedFavorite(false);
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
 
 
+})
+
+
+document.addEventListener(
+    "change",
+    (event) => {
+        // listening for "User" which is the dropdown
+        if (event.target.name === "User") {
+    //  setFeed is setting who ever you clicked on - setting the value of that user
+            setFeed(parseInt(event.target.value))
+            // runs the UserChoice function which returns the HTML in GiffyGram Feed
+            document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+            
+
+        }
+    }
+)
 
 
 

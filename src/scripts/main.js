@@ -1,8 +1,8 @@
 import { GiffyGram} from "./GiffyGram.js"
 import { LoginForm } from "./auth/Login.js"
-import { fetchPosts, fetchUsers, getUsers, fetchMessages } from "./data/provider.js"
-import { getCurrentUser } from "./data/provider.js"
-import { applicationState } from "./data/provider.js"
+import { fetchFavorites, fetchPosts, fetchUsers, getUsers, fetchMessages } from "./data/provider.js"
+import { getCurrentUser, applicationState } from "./data/provider.js"
+
 
 
 // Looks for Main Container and selects
@@ -20,6 +20,9 @@ export const renderApp = () => {
         }).then(
             () => {
                 return fetchMessages()
+            }).then(
+            () => {
+            return fetchFavorites()
             }).then(
             () => {
             // if current user id is "truthy" (exists) 
