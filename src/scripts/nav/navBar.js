@@ -1,4 +1,5 @@
-
+import { setFeedFavorite, setFeed} from "../data/provider.js"
+const mainContainer = document.querySelector(".giffygram")
 
 export const navBar = () => {
     return `
@@ -18,3 +19,25 @@ export const navBar = () => {
         </div>
 `
 }
+
+
+mainContainer.addEventListener("click", clickEvent => {
+
+    if (clickEvent.target.id === "logo") {
+        setFeedFavorite(false)
+        setFeed(false)
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+        
+    }
+}
+  )
+
+  mainContainer.addEventListener("click", clickEvent => {
+
+    if (clickEvent.target.id === "logout") {
+        localStorage.clear();
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+        
+    }
+}
+  )

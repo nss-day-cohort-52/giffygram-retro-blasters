@@ -1,8 +1,8 @@
 import { GiffyGram} from "./GiffyGram.js"
 import { LoginForm } from "./auth/Login.js"
-import { fetchFavorites, fetchPosts, fetchUsers, getUsers } from "./data/provider.js"
-import { getCurrentUser } from "./data/provider.js"
-import { applicationState } from "./data/provider.js"
+import { fetchFavorites, fetchPosts, fetchUsers, getUsers, fetchMessages } from "./data/provider.js"
+import { getCurrentUser, applicationState } from "./data/provider.js"
+
 
 
 // Looks for Main Container and selects
@@ -17,8 +17,10 @@ export const renderApp = () => {
         () => {
             // grabbing Posts from API 
          return fetchPosts()
-        })
-        .then(
+        }).then(
+            () => {
+                return fetchMessages()
+            }).then(
             () => {
             return fetchFavorites()
             }).then(

@@ -1,11 +1,12 @@
 import { PostForm } from "./message/MessageForm.js"
-import { getPosts, sendFavorite, setFavoritePost, setFavorites, setFeed, setFavoriteUser} from "./data/provider.js"
-import { giffyGramFeed } from "./feed/post.js"
-import { setUserProfile } from "./data/provider.js"
+import { setFavorites, setFeed, setPostMessage, getFeed, setFeedFavorite} from "./data/provider.js"
+import { setUserProfile, getPostMessage } from "./data/provider.js"
 import { userProfile } from "./feed/UserProfile.js"
 import { userDropDown, UserChoice } from "./nav/Footer.js"
 import { navBar } from "./nav/navBar.js"
+import { DirectMessage } from "./friends/DirectMessage.js"
 import { PostList } from "./feed/PostList.js"
+import { selectFavorites } from "./nav/Footer.js"
 
 // Finding and selecting Main Container 
 const mainContainer = document.querySelector(".giffygram")
@@ -14,6 +15,8 @@ const mainContainer = document.querySelector(".giffygram")
 // Defining function to return the Post Form button HTML 
 
 export const GiffyGram = () => {
+    const postState = getPostMessage()
+    const feed = getFeed()
     // setting HTML to empty string
     let html = ""
     //   setting HTML for the post form section (button)
@@ -22,23 +25,42 @@ export const GiffyGram = () => {
     ${navBar()}
     </nav>
 
-    <div class="giffygram__feed">
+    <div class="giffygram__feed">`
     
-    <section class="postForm">
-    <div class="miniMode" id="miniMode">Have a gif to post?</div>
-    </section>
+    if (postState) {
+        html += DirectMessage()
+    } else {
+        // runs the Login Form again if false 
+        html += `<section class="postForm">
+                <div class="miniMode" id="miniMode">Have a gif to post?</div>
+                </section>
+                <!-- Calling the function that displays posts in feed -->
+                <section class="postFeed">`
+       html += PostList()
+    }
 
-    <!-- Calling the function that displays posts in feed -->
-    <section class="postFeed">
-    ${PostList()}
-    </section>
+
+    if (feed.displayFavorites) {
+        html += `
+    <nav class="navBar">
+    ${navBar()}
+    </nav>
+
+    <div class="giffygram__feed">
+    <section class ="favoritesFeed">
+    </section>`
+    }
+
+    html += `</section>
     </div>
     <footer class="footer">
     ${userDropDown()}
-    
+    ${selectFavorites()}
     </footer>`
+    setPostMessage(0); 
     return html
 }
+
 
 
 
@@ -87,10 +109,26 @@ document.addEventListener(
   mainContainer.addEventListener("click", clickEvent => {
 
     if (clickEvent.target.id === "logo") {
+        setFeedFavorite(false)
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
         
     }
 }
   )
 
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.name === "favoriteStarBlank") {
+        setFavorites(parseInt(clickEvent.target.id))
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+
+
+mainContainer.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessageIcon") {
+        document.querySelector(".giffygram__feed").innerHTML=DirectMessage()
+    }
+})
 

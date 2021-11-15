@@ -48,7 +48,7 @@ export const giffyGramFeed = (post) => {
                     : "/images/favorite-star-yellow.svg"
                 }"
                 /> `
-            return html
+            
         
         html += `</section>`
         return html
